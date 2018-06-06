@@ -29,6 +29,18 @@ function RelayProxy:Initialize()
 	self._SyncByte = 0xfb
 end
 
+function RelayProxy:SendChannelId(bindid,channelid)
+    LogTrace("RelayProxy:SendChannelId")
+    local devid = C4:GetDeviceID()     
+    local devs = C4:GetBoundConsumerDevices(devid , bindid)   
+    if (devs ~= nil) then
+	   for id,name in pairs(devs) do
+		  C4:SendToDevice(id,"CHANNELID",{CHID = channelid})
+		  print ("id " .. id .. " name " .. name)
+	   end
+    end
+end
+
 function RelayProxy:SendCommandToDeivce(command)
     LogTrace("RelayProxy:SendCommandToDeivce")
 

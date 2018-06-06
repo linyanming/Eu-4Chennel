@@ -427,14 +427,14 @@ end
 function OnBindingChanged(idBinding, class, bIsBound)
 	
 	LogTrace("OnBindingChanged(): idBinding = " .. tostring(idBinding) .. ", class = " .. class .. ", bIsBound = " .. tostring(bIsBound))
-	if (idBinding == SERIAL_BINDING_ID) then
-		gIsSerialConnected = bIsBound
-		SetControlMethod()
-		OnSerialConnectionChanged(idBinding, class, bIsBound)
-	elseif (idBinding == IR_BINDING_ID) then
-		gIsIRConnected = bIsBound
-		SetControlMethod()
-		OnIRConnectionChanged(idBinding, class, bIsBound)
+	if (idBinding == CHANNEL1_BINDING_ID and bIsBound == true) then
+		gRelayProxy:SendChannelId(idBinding,1)
+	elseif (idBinding == CHANNEL2_BINDING_ID and bIsBound == true) then
+	     gRelayProxy:SendChannelId(idBinding,2)
+     elseif (idBinding == CHANNEL3_BINDING_ID and bIsBound == true) then
+	     gRelayProxy:SendChannelId(idBinding,3)
+    	elseif (idBinding == CHANNEL4_BINDING_ID and bIsBound == true) then
+	     gRelayProxy:SendChannelId(idBinding,4)
 	elseif(OnConnectionChanged ~= nil and type(OnConnectionChanged) == "function") then
 		OnConnectionChanged(idBinding, class, bIsBound)
 	end
