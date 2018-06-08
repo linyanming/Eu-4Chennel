@@ -8,7 +8,7 @@
   <name>Relay 4Channel</name>
   <model>Relay</model>
   <created>05/24/2018 9:03 AM</created>
-  <modified>06/05/2018 1:41 PM</modified>
+  <modified>06/08/2018 12:30 PM</modified>
   <!-- 
 	Each time you modify the driver update the version number below.
 	-->
@@ -181,6 +181,13 @@
                 properties can be used to set which stream to use for specific resolutions or type. If the camera does not support 
                 multiple stream configurations using profiles, then the Stream Profile properties can be removed.
             -->
+      <property>
+        <name>BoxID</name>
+        <type>RANGED_INTEGER</type>
+        <default>255</default>
+        <minimum>0</minimum>
+        <maximum>255</maximum>
+      </property>
     </properties>
     <!-- 
 		Update the documentation rtf file then copy the text version between the two documentation tabs for Composer Express

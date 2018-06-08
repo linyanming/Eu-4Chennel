@@ -9,7 +9,9 @@ if (TEMPLATE_VERSION ~= nil) then
 	TEMPLATE_VERSION.properties = "2017.01.13"
 end
 
-
+function ON_PROPERTY_CHANGED.BoxID(propertyValue)
+	gRelayProxy._BoxID = tonumber(propertyValue)
+end
 --[[
 function ON_PROPERTY_CHANGED.MJPEGStreamID(propertyValue)
 	gCameraProxy._MJPEG_Stream_ID = tonumber(propertyValue)

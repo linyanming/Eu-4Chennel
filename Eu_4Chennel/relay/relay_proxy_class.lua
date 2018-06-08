@@ -25,7 +25,7 @@ function RelayProxy:Initialize()
 	-- create and initialize member variables
 	self._PackLen = 8
      self._DeviceCode = 0x23
-	self._BoxID = 0xff
+	self._BoxID = Properties["BoxID"]
 	self._SyncByte = 0xfb
 end
 
