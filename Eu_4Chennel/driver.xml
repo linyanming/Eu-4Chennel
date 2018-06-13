@@ -8,11 +8,11 @@
   <name>Relay 4Channel</name>
   <model>Relay</model>
   <created>05/24/2018 9:03 AM</created>
-  <modified>06/08/2018 12:30 PM</modified>
+  <modified>06/13/2018 12:58 PM</modified>
   <!-- 
 	Each time you modify the driver update the version number below.
 	-->
-  <version>15</version>
+  <version>16</version>
   <capabilities>
     <!-- 
 		These are the modes the camera might support.  If the camera does not support H264 then remove the H264 entries

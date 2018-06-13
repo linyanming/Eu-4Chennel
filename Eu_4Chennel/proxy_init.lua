@@ -24,7 +24,7 @@ function ON_DRIVER_INIT.proxy_init()
 end
 
 function ON_DRIVER_LATEINIT.proxy_init()
-
+    StartTimer(gRelayProxy._CmdTimer)
 	
 end
 

@@ -44,7 +44,11 @@ function EX_CMD.RECVMSG(tParams)
     LogTrace("EX_CMD.RECVMSG")
 	LogTrace(tParams)
 	local msg = tParams["MESSAGE"]
-	local tmp_msg = ""
+	if(msg ~= nil and msg ~= "") then
+	   local tmp_msg = tohex(msg)
+	   gRelayProxy:HandleMessage(tmp_msg,#tmp_msg)
+	end
+--[[
 	if(msg ~= nil and msg ~= "") then
 	    local msglen = #msg/2
 	    local message = string.lower(msg)
@@ -66,4 +70,5 @@ function EX_CMD.RECVMSG(tParams)
 	    end
 	    gRelayProxy:HandleMessage(tmp_msg,msglen)
 	end
+	]]
 end
