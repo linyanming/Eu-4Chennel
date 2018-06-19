@@ -48,27 +48,4 @@ function EX_CMD.RECVMSG(tParams)
 	   local tmp_msg = tohex(msg)
 	   gRelayProxy:HandleMessage(tmp_msg,#tmp_msg)
 	end
---[[
-	if(msg ~= nil and msg ~= "") then
-	    local msglen = #msg/2
-	    local message = string.lower(msg)
-	    for i = 1,msglen do
-	        local temp = 0
-	        local tab = (i - 1)*2 + 1
-            if(string.byte(message,tab) >= string.byte("a")) then
-                temp = temp + (string.byte(message,tab) - string.byte("a") + 10) * 16
-            else
-                temp = temp + (string.byte(message,tab) - string.byte("0")) * 16
-            end
-            if(string.byte(message,tab+1) >= string.byte("a")) then
-                temp = temp + (string.byte(message,tab+1) - string.byte("a") + 10)
-            else
-                temp = temp + (string.byte(message,tab+1) - string.byte("0"))
-            end            
-            print(temp)
-            tmp_msg = tmp_msg .. string.pack("b",temp)
-	    end
-	    gRelayProxy:HandleMessage(tmp_msg,msglen)
-	end
-	]]
 end

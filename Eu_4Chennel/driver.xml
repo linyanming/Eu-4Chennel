@@ -8,11 +8,11 @@
   <name>Relay 4Channel</name>
   <model>Relay</model>
   <created>05/24/2018 9:03 AM</created>
-  <modified>06/13/2018 12:58 PM</modified>
+  <modified>06/19/2018 10:11 AM</modified>
   <!-- 
 	Each time you modify the driver update the version number below.
 	-->
-  <version>16</version>
+  <version>21</version>
   <capabilities>
     <!-- 
 		These are the modes the camera might support.  If the camera does not support H264 then remove the H264 entries
@@ -41,7 +41,7 @@
 		If the H264 stream does not appear or the documentation states it is accessed over HTTP then set the below to True.
 		-->
   </capabilities>
-  <small>devices_sm\ThreeButtonKeypad.GIF</small>
+  <small>devices_sm\c4modI_16.gif</small>
   <large>devices_lg\camera_lg.gif</large>
   <control>lua_gen</control>
   <controlmethod>serial</controlmethod>

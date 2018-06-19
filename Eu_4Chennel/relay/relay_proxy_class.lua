@@ -32,13 +32,13 @@ function RelayProxy:Initialize()
 	self._CmdPos = 1
 	self._CmdSendPos = 1
 	self._CmdTableMax = 100
-	self._CmdSync  = false
+--	self._CmdSync  = false
 	
      self._CmdTimer = CreateTimer("CMD_PROCESS", 50, "MILLISECONDS", CmdTimerCallback, true, nil)
-	self._CmdCnfTimer = CreateTimer("CMD_CONFIRM", 200, "MILLISECONDS", CmdCnfTimerCallback, false, nil)
+--	self._CmdCnfTimer = CreateTimer("CMD_CONFIRM", 200, "MILLISECONDS", CmdCnfTimerCallback, false, nil)
 
 end
-
+--[[
 function CmdCnfTimerCallback()
     LogTrace("confirm fail")
     gRelayProxy:SendCommandToDeivce(gRelayProxy._CmdTable[gRelayProxy._CmdSendPos])
@@ -50,8 +50,9 @@ function CmdCnfTimerCallback()
     end
     gRelayProxy._CmdSync = false
 end
-
+]]
 function CmdTimerCallback()
+--[[
     if(gRelayProxy._CmdTable[gRelayProxy._CmdSendPos] ~= nil and gRelayProxy._CmdTable[gRelayProxy._CmdSendPos] ~= "" and gRelayProxy._CmdSync ~= true) then
 	   if(string.byte(gRelayProxy._CmdTable[gRelayProxy._CmdSendPos],4) == 0xfe) then
 		  gRelayProxy._CmdSync = true
@@ -66,18 +67,39 @@ function CmdTimerCallback()
 			 gRelayProxy._CmdSendPos = gRelayProxy._CmdSendPos + 1
 		  end
 	   end
-	   
-	   
+    else
+	   if(gRelayProxy._CmdSync ~= true) then
+		  KillTimer(gRelayProxy._CmdTimer)
+		  LogTrace("KillTimer")
+	   end
     end
+]]
+    if(gRelayProxy._CmdTable[gRelayProxy._CmdSendPos] ~= nil and gRelayProxy._CmdTable[gRelayProxy._CmdSendPos] ~= "") then
+        gRelayProxy:SendCommandToDeivce(gRelayProxy._CmdTable[gRelayProxy._CmdSendPos])
+        gRelayProxy._CmdTable[gRelayProxy._CmdSendPos] = ""
+        if(gRelayProxy._CmdSendPos == gRelayProxy._CmdTableMax) then
+           gRelayProxy._CmdSendPos = 1
+        else
+           gRelayProxy._CmdSendPos = gRelayProxy._CmdSendPos + 1
+        end
+    else
+        KillTimer(gRelayProxy._CmdTimer)
+    end
+
 end
 
 function RelayProxy:AddToQueue(command)
     LogTrace("RelayProxy:AddToQueue")
-    self._CmdTable[self._CmdPos] = command
-    if(self._CmdPos == self._CmdTableMax) then
-	   self._CmdPos = 1
+    if(TimerStarted(self._CmdTimer)) then
+	   self._CmdTable[self._CmdPos] = command
+	   if(self._CmdPos == self._CmdTableMax) then
+		  self._CmdPos = 1
+	   else
+		  self._CmdPos = self._CmdPos + 1
+	   end
     else
-	   self._CmdPos = self._CmdPos + 1
+	   self:SendCommandToDeivce(command)
+	   StartTimer(self._CmdTimer)
     end
 end
 
@@ -144,7 +166,9 @@ function RelayProxy:HandleMessage(message,msglen)
 		  LogTrace("data success")
 		  local channel = msg_data[5] + 1
 		  local level = msg_data[6]
+--[[
 		  if((channel - 1) == string.byte(self._CmdTable[self._CmdSendPos],5) and self._CmdSync == true) then
+
 			 if(TimerStarted(self._CmdCnfTimer)) then
 				LogTrace("confirm success")
 				KillTimer(self._CmdCnfTimer)
@@ -156,12 +180,16 @@ function RelayProxy:HandleMessage(message,msglen)
 				end
 				self._CmdSync = false
 			 end
+			 
 		  end
-		  local devid = C4:GetDeviceID()     
-		  local devs = C4:GetBoundConsumerDevices(devid , channel+1)   
-		  if (devs ~= nil) then
-			 for id,name in pairs(devs) do
-				C4:SendToDevice(id,"LIGHTREPORT",{LEVEL = level})
+		  ]]
+		  if(msg_data[4] == 0xfd) then
+			 local devid = C4:GetDeviceID()     
+			 local devs = C4:GetBoundConsumerDevices(devid , channel+1)   
+			 if (devs ~= nil) then
+				for id,name in pairs(devs) do
+				    C4:SendToDevice(id,"LIGHTREPORT",{LEVEL = level})
+				end
 			 end
 		  end
 	   else
