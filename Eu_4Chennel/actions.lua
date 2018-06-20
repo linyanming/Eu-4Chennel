@@ -24,3 +24,11 @@ function LUA_ACTION.Sync()
 	print("Id is " .. dest_id)
 	C4:SendToDevice(dest_id,"SYNCDEV",{DEVICE_ID = devid})
 end
+
+function LUA_ACTION.SetBoxID(tPramas)
+	local boxid = tPramas["BOXID"]
+	local cmd = string.pack("bbbb",gRelayProxy._SyncByte,gRelayProxy._DeviceCode,gRelayProxy._BoxID,0xe4)
+	cmd = cmd .. gRelayProxy._Guid .. string.pack("bbbb",boxid,0x00,0x00,0x00)
+	hexdump(cmd)
+	gRelayProxy:SendCommandToDeivce(cmd)
+end

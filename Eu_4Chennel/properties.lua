@@ -12,6 +12,10 @@ end
 function ON_PROPERTY_CHANGED.BoxID(propertyValue)
 	gRelayProxy._BoxID = tonumber(propertyValue)
 end
+
+function ON_PROPERTY_CHANGED.GUID(propertyValue)
+	gRelayProxy._Guid = tohex(propertyValue)
+end
 --[[
 function ON_PROPERTY_CHANGED.MJPEGStreamID(propertyValue)
 	gCameraProxy._MJPEG_Stream_ID = tonumber(propertyValue)

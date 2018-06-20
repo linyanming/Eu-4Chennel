@@ -8,11 +8,11 @@
   <name>Relay 4Channel</name>
   <model>Relay</model>
   <created>05/24/2018 9:03 AM</created>
-  <modified>06/19/2018 10:11 AM</modified>
+  <modified>06/20/2018 1:39 PM</modified>
   <!-- 
 	Each time you modify the driver update the version number below.
 	-->
-  <version>21</version>
+  <version>24</version>
   <capabilities>
     <!-- 
 		These are the modes the camera might support.  If the camera does not support H264 then remove the H264 entries
@@ -158,6 +158,7 @@
           <item>4 - Debug</item>
           <item>5 - Trace</item>
         </items>
+        <multiselect>false</multiselect>
       </property>
       <property>
         <name>Log Mode</name>
@@ -170,6 +171,7 @@
           <item>Log</item>
           <item>Print and Log</item>
         </items>
+        <multiselect>false</multiselect>
       </property>
       <!-- 
                 If the camera supports multiple stream configurations that can be selected by a stream ID, then the following
@@ -187,6 +189,15 @@
         <default>255</default>
         <minimum>0</minimum>
         <maximum>255</maximum>
+        <readonly>false</readonly>
+        <multiselect>false</multiselect>
+      </property>
+      <property>
+        <name>GUID</name>
+        <type>STRING</type>
+        <default>00000000</default>
+        <readonly>false</readonly>
+        <multiselect>false</multiselect>
       </property>
     </properties>
     <!-- 
@@ -203,10 +214,85 @@
         <name>Sync</name>
         <command>Sync</command>
       </action>
+      <action>
+        <name>SetBoxID</name>
+        <command>SetBoxID</command>
+        <params>
+          <param>
+            <name>BOXID</name>
+            <type>RANGED_INTEGER</type>
+            <default></default>
+            <minimum>0</minimum>
+            <maximum>255</maximum>
+          </param>
+        </params>
+      </action>
     </actions>
     <serialsettings>9600 8 none 1 none 485</serialsettings>
   </config>
   <composer_categories>
     <category>User Interface</category>
   </composer_categories>
+  <dependencies>
+    <dependency alwaysAdd="true" addMultiple="true">
+      <name>light_template.c4z</name>
+      <auto_bindings>
+        <auto_binding>
+          <id>2</id>
+          <isconsumer>false</isconsumer>
+          <classes>
+            <class>
+              <classname>RELAY</classname>
+            </class>
+          </classes>
+          <dep_binding_id>1</dep_binding_id>
+        </auto_binding>
+      </auto_bindings>
+    </dependency>
+    <dependency alwaysAdd="true" addMultiple="true">
+      <name>light_template.c4z</name>
+      <auto_bindings>
+        <auto_binding>
+          <id>3</id>
+          <isconsumer>false</isconsumer>
+          <classes>
+            <class>
+              <classname>RELAY</classname>
+            </class>
+          </classes>
+          <dep_binding_id>1</dep_binding_id>
+        </auto_binding>
+      </auto_bindings>
+    </dependency>
+    <dependency alwaysAdd="true" addMultiple="true">
+      <name>light_template.c4z</name>
+      <auto_bindings>
+        <auto_binding>
+          <id>4</id>
+          <isconsumer>false</isconsumer>
+          <classes>
+            <class>
+              <classname>RELAY</classname>
+            </class>
+          </classes>
+          <dep_binding_id>1</dep_binding_id>
+        </auto_binding>
+      </auto_bindings>
+    </dependency>
+    <dependency alwaysAdd="true" addMultiple="true">
+      <name>light_template.c4z</name>
+      <auto_bindings>
+        <auto_binding>
+          <id>5</id>
+          <isconsumer>false</isconsumer>
+          <classes>
+            <class>
+              <classname>RELAY</classname>
+            </class>
+          </classes>
+          <dep_binding_id>1</dep_binding_id>
+        </auto_binding>
+      </auto_bindings>
+    </dependency>
+  </dependencies>
 </devicedata>
