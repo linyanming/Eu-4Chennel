@@ -5,14 +5,14 @@
 	If you are making your own driver then change the details below.  Note the date is in US format: Month/Day/Year
 	-->
   <manufacturer>Hiwise</manufacturer>
-  <name>Relay 4Channel</name>
-  <model>Relay</model>
+  <name>Eu_4Channel</name>
+  <model>Eu_4Channel</model>
   <created>05/24/2018 9:03 AM</created>
-  <modified>08/21/2018 9:30 AM</modified>
+  <modified>08/22/2018 1:54 PM</modified>
   <!-- 
 	Each time you modify the driver update the version number below.
 	-->
-  <version>25</version>
+  <version>27</version>
   <capabilities>
     <!-- 
 		These are the modes the camera might support.  If the camera does not support H264 then remove the H264 entries
@@ -231,7 +231,7 @@
   </composer_categories>
   <dependencies>
     <dependency alwaysAdd="true" addMultiple="true">
-      <name>light_template.c4z</name>
+      <name>Eu_Light.c4z</name>
       <auto_bindings>
         <auto_binding>
           <id>2</id>
@@ -246,7 +246,7 @@
       </auto_bindings>
     </dependency>
     <dependency alwaysAdd="true" addMultiple="true">
-      <name>light_template.c4z</name>
+      <name>Eu_Light.c4z</name>
       <auto_bindings>
         <auto_binding>
           <id>3</id>
@@ -261,7 +261,7 @@
       </auto_bindings>
     </dependency>
     <dependency alwaysAdd="true" addMultiple="true">
-      <name>light_template.c4z</name>
+      <name>Eu_Light.c4z</name>
       <auto_bindings>
         <auto_binding>
           <id>4</id>
@@ -276,7 +276,7 @@
       </auto_bindings>
     </dependency>
     <dependency alwaysAdd="true" addMultiple="true">
-      <name>light_template.c4z</name>
+      <name>Eu_Light.c4z</name>
       <auto_bindings>
         <auto_binding>
           <id>5</id>
